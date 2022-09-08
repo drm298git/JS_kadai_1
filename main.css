@@ -1,0 +1,44 @@
+@charset "UTF-8"
+
+html,body {
+    font-size: 16px;
+    background-color: #fff;
+}
+
+.text_title {
+    color: #000;
+    font-size: 2rem;
+    width: 50;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#container {
+    background-color: #fff;
+    width: 540px;
+    border-radius: 1rem;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+
+#time {
+    color: #000;
+    font-size: 3rem;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin: .5rem;
+}
+
+#buttons {
+    font-size: 3rem;
+    margin: .2rem;
+    width : 100%;
+    text-align: center;
+}
+
+#startbutton, #stopbutton, #resetbutton {
+    font-size: 1.5rem;
+    border-radius: .3rem;
+    text-align: center;
+}
