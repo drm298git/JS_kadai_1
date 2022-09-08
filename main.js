@@ -1,19 +1,20 @@
-/*ボタンの要素を取得*/
 const time = document.getElementById('time');
-const startbutton = document.getElementById('start');
-const stopbutton = document.getElementById('stop');
-const resetbutton = document.getElementById('reset');
+const startButton = document.getElementById('start');
+const stopButton = document.getElementById('stop');
+const resetButton = document.getElementById('reset');
 
-/*変数の定義*/
+// 開始時間の定義
 let startTime;
+// 停止時間の定義
 let stopTime = 0;
-let reset;
+// タイムアウトIDの定義
+let timeoutID;
 
-
+// 時間表示のための関数
 function displayTime() {
     const currentTime = new Date(Date.now() - startTime + stopTime);
-    const h = String(currentTime.getHours()-1).padStart(2, '0');
-    const m = String(currentTime.getMinutes()).padStart(2, '0');
+    const h = String(currentTime.getHours()-9).padStart(2, '0');
+    const m = String(currentTime.getMinutes()).padStart(2, '0');    
     const s = String(currentTime.getSeconds()).padStart(2, '0');
     const ms = String(currentTime.getMilliseconds()).padStart(3, '0');
 
@@ -21,29 +22,29 @@ function displayTime() {
     timeoutID = setTimeout(displayTime, 10);
 }
 
-
-startbutton.addEventListener('click', () => {
-    startbutton.disabled = true;
-    stopbutton.disabled = false;
-    resetbutton.disabled = true;
-    startTime = Date.now();
-    displayTime();
+// スタートボタンがクリックされたら時間を進める
+startButton.addEventListener('click', () => {
+  startButton.disabled = true;
+  stopButton.disabled = false;
+  resetButton.disabled = true;
+  startTime = Date.now();
+  displayTime();
 });
 
+// ストップボタンがクリックされたら時間を止める
+stopButton.addEventListener('click', function() {
+  startButton.disabled = false;
+  stopButton.disabled = true;
+  resetButton.disabled = false;
+  clearTimeout(timeoutID);
+  stopTime += (Date.now() - startTime);
+});
 
-stopbutton.addEventListener('click', () => {
-    startbutton.disabled = false;
-    stopbutton.disable = true;
-    resetbutton.disabled = false;
-    clearTimeout(timeoutID);
-    stopTime += (Date.now() - startTime);
-})
-
-
-resetbutton.addEventListener('click', () => {
-    startbutton.disabled = false;
-    stopbutton.disable = true;
-    resetbutton.disable = true;
-    time.textContent = '00:00:00.000';
-    stopTime = 0;
-})
+// リセットボタンがクリックされたら時間を0に戻す
+resetButton.addEventListener('click', function() {
+  startButton.disabled = false;
+  stopButton.disabled = true;
+  resetButton.disabled = true;
+  time.textContent = '00:00:00.000';
+  stopTime = 0;
+});
